@@ -31,4 +31,3 @@ for token in word_punct_token:
 
 #split it into words
 #tokens = nltk.word_tokenize(pts)
-
