@@ -7,6 +7,7 @@
 import csv
 import pandas as pd
 import nltk
+from tokenization import clean_token
 #Lemmatization
 from nltk.corpus import wordnet as wn
 from nltk.stem.wordnet import WordNetLemmatizer
@@ -34,7 +35,9 @@ for i in range(500):
     singlePost_stem = []
     singlePost_lemm = []
     #tokenize the csv file of sentences, and read file line by line
-    tokenization = nltk.word_tokenize(posts.readline())
+    #tokenization = nltk.word_tokenize(posts.readline())
+    #改的这里！###############################################
+    tokenization = clean_token[i]
     for w in tokenization:
         #get one token of (w)th post in stemming method
         rootWord_stem = stemmer.stem(w) 
