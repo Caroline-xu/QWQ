@@ -43,20 +43,6 @@ for data in token_post:
 #print(wordCount)
 #print(len(wordCount))
 
-
-
-"""
-Finding the tf values and idf values:
-tfValue = numAppearPerComment/numInComment
-idfValue = log(500/w.value)
-"""
-idfList = []
-totalComments = len(token_post)
-#print(totalComments)
-for w in wordCount.values():
-    idfValue = math.log(totalComments/w)
-    idfList.append(idfValue)
-
 #print(idfList)
 
 first_matrix_token = []
@@ -85,6 +71,27 @@ for m_data in token_post:
             matrix_token[commend][index] += 1
     commend += 1
 
+
+"""
+Finding the tf values and idf values:
+tfValue = numAppearPerComment/numInComment
+idfValue = log(500/w.value)
+"""
+idfList = []
+totalComments = len(matrix_token)
+total_word = len(matrix_token[0])
+#print(totalComments)
+for i in range(total_word):
+    w = 0
+    for j in range(1,501):
+        if (matrix_token[j][i] != 0):
+            w += 1
+    idfValue = math.log(totalComments/w)
+    idfList.append(idfValue)
+
+    
+
+
 #tfValue = numAppearPerComment/numInComment
 tfList = []
 for i in range(len(matrix_token)):
@@ -93,8 +100,6 @@ for i in range(len(matrix_token)):
             tfValue = matrix_token[i][j] / len(token_post[i-1])
             tfList.append(tfValue)
 print(tfList)
-
-
 
 tf_idf_list = []
 idf_time = 0
