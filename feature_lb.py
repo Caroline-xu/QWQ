@@ -9,18 +9,22 @@ stop_words = set(stopwords.words('english'))
 from preprocessing import reddit_lemm
 from preprocessing import reddit_stem
 from preprocessing import stop_words
+from preprocessing import df
 
 from sklearn.feature_extraction.text import TfidfVectorizer
+
+label = df.loc[:, "Label"]
 
 #TF-IDF
 tfidf = TfidfVectorizer(analyzer=lambda x:[w for w in x if w not in stop_words])
 tfidf_vectors = tfidf.fit_transform(reddit_lemm)
 
-df = pd.DataFrame(tfidf_vectors.todense(), columns=tfidf.vocabulary_)
-print(df)
+df2 = pd.DataFrame(tfidf_vectors.todense(), columns=tfidf.vocabulary_)
+df2['label'] = label
+print(df2['label'])
 compression_opts = dict(method='zip',
                         archive_name='tfidf.csv') 
-df.to_csv('tfidf.zip', index=False,
+df2.to_csv('tfidf.zip', index=False,
           compression=compression_opts) 
 
 
@@ -30,8 +34,8 @@ from sklearn.feature_extraction.text import HashingVectorizer
 hv = HashingVectorizer(analyzer=lambda x:[w for w in x if w not in stop_words])
 hv_vectors = hv.fit_transform(reddit_lemm)
 
-df = pd.DataFrame(hv_vectors.todense())
-print(df)
+df2 = pd.DataFrame(hv_vectors.todense())
+print(df2)
 
 '''''
 
