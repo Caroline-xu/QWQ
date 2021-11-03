@@ -18,3 +18,5 @@ def train_naive_bayes(X_train, X_test, y_train, y_test):
     y_proba = gnb.predict_proba(X_test[:1])
     print(gnb.predict(X_test[:1]))
     print("The estimated probability:", y_proba)
+
+    
