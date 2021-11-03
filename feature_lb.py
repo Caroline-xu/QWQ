@@ -1,4 +1,3 @@
-from nltk.tokenize import word_tokenize
 import pandas as pd
 import csv
 import nltk
@@ -6,7 +5,10 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 stop_words = set(stopwords.words('english'))
 from nltk.util import ngrams
-
+from nltk.tokenize import word_tokenize, RegexpTokenizer
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer 
+  
 from preprocessing import reddit_lemm
 from preprocessing import reddit_stem
 from preprocessing import stop_words
@@ -48,7 +50,7 @@ def sentiment_scores(sentence):
     polarity = 0
     # Create a SentimentIntensityAnalyzer object. 
     sid_obj = SentimentIntensityAnalyzer() 
-  
+  #if could not run, use"pip install vaderSentiment" in terminal
     # polarity_scores method of SentimentIntensityAnalyzer 
     # oject gives a sentiment dictionary. 
     # which contains pos, neg, neu, and compound scores. 
