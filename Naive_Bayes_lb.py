@@ -9,14 +9,12 @@ def train_naive_bayes(X_train, X_test, y_train, y_test):
     gnb=GaussianNB()
     gnb.fit(X_train, y_train)
 
-    # evaluate
+    # evaluate the model
     y_pred = gnb.predict(X_test)
     acc = np.sum(y_test == y_pred) / X_test.shape[0]
     print("Test Acc : %.3f" % acc)
 
-    # predict
+    # predict the model
     y_proba = gnb.predict_proba(X_test[:1])
     print(gnb.predict(X_test[:1]))
     print("The estimated probability:", y_proba)
-
-    
