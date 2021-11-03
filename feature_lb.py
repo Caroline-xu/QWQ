@@ -5,6 +5,7 @@ import nltk
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 stop_words = set(stopwords.words('english'))
+from nltk.util import ngrams
 
 from preprocessing import reddit_lemm
 from preprocessing import reddit_stem
@@ -39,16 +40,8 @@ compression_opts = dict(method='zip',
 df3.to_csv('countvec.zip', index=False,
           compression=compression_opts) 
 
+#n-gram
+all_ngrams = []
+for sent in reddit_lemm:
+    all_ngrams.extend(nltk.ngrams(sent, len(sent)))
 
-'''''
-
-#Word2Vec
-from pyspark.ml.feature import Word2Vec
-df = pd.read_csv("reddit_lemm.csv")
-
-word2Vec = Word2Vec(vectorSize=500, minCount=2, inputCol=df, outputCol= "result")
-word2vec_m = word2Vec.fit(reddit_lemm)
-
-print(word2vec_m)
-
-'''''
