@@ -19,6 +19,8 @@ stop_words = list(set(stopwords.words('english')))
 
 #tokenize "Post" column, can create new column called "tokenized_post"
 df['Tokenized Post'] = df.apply(lambda row: nltk.word_tokenize(row['Post']), axis=1)
+# add new column called "New Label" which convert labels to number from 0-4
+df['New Label'] = df['Label'].replace(['Supportive','Ideation','Attempt','Behavior','Indicator'],[0, 1, 2, 3, 4])
 
 #iterrate over "tokenized_posts" cloumn
 for index, value in df["Tokenized Post"].items():
