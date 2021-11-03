@@ -27,15 +27,18 @@ compression_opts = dict(method='zip',
 df2.to_csv('tfidf.zip', index=False,
           compression=compression_opts) 
 
+#CountVectorizer word Frequency
+from sklearn.feature_extraction.text import CountVectorizer
+cv = CountVectorizer(analyzer=lambda x:[w for w in x if w not in stop_words])
+cv_vectors = cv.fit_transform(reddit_lemm)
 
 
-#CountVectorizer
-from sklearn.feature_extraction.text import HashingVectorizer
-hv = HashingVectorizer(analyzer=lambda x:[w for w in x if w not in stop_words])
-hv_vectors = hv.fit_transform(reddit_lemm)
+df3 = pd.DataFrame(cv_vectors.todense(), columns=cv.vocabulary_)
+compression_opts = dict(method='zip',
+                        archive_name='countvec.csv') 
+df3.to_csv('countvec.zip', index=False,
+          compression=compression_opts) 
 
-df2 = pd.DataFrame(hv_vectors.todense())
-print(df2)
 
 '''''
 
