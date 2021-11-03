@@ -5,8 +5,9 @@ def train_naive_bayes(X_train, X_test, y_train, y_test):
     import pandas as pd
     import numpy as np
 
-
+    #calculate the GaussianNB
     gnb=GaussianNB()
+
     gnb.fit(X_train, y_train)
 
     # evaluate the model
