@@ -10,7 +10,10 @@ from train_linear_regression import train_linear_regression
 #from linear_regression import train_linear_regression
 #from decision_tree import train_decision_tree
 #from naive_bayes import train_naive_bayes
+
+from random_forest import train_random_forest
 #from random_forest import train_random_forest
+
 def get_data():
     # Loads the features dataset to a pandas dataframe and returns it
 # Load the Diabetes dataset
@@ -45,6 +48,10 @@ if __name__ == '__main__':
     for train_index , test_index in kf.split(X):
         X_train , X_test = X.iloc[train_index,:],X.iloc[test_index,:]
         y_train , y_test = y[train_index] , y[test_index]
+        
+        ### comment out the following line to train random forest classfication, and print out the accuracy 
+        # train_random_forest(X_train, X_test, y_train, y_test)
+        
         acc = train_linear_regression(X_train, X_test, y_train, y_test)
         acc_score.append(acc)
     avg_acc_score = sum(acc_score)/k
