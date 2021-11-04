@@ -8,7 +8,7 @@ from nltk.util import ngrams
 from nltk.tokenize import word_tokenize, RegexpTokenizer
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer 
-  
+
 def feature_lb():
     from preprocessing import reddit_lemm
     from preprocessing import reddit_stem
@@ -18,7 +18,8 @@ def feature_lb():
     from sklearn.feature_extraction.text import TfidfVectorizer
 
     
-
+    #Label = df['New Label']
+    
     #TF-IDF
     tfidf = TfidfVectorizer(analyzer=lambda x:[w for w in x if w not in stop_words])
     tfidf_vectors = tfidf.fit_transform(reddit_lemm)
@@ -88,9 +89,8 @@ def feature_lb():
     #add polarity to dataframe
     df2['Polarity'] = polarity_score
     #add label to data frame
-    df = pd.read_csv('500_Reddit_users_posts_labels.csv')
-    Label = df['Label']
-    df2['Label'] = Label
+    Label = df['New Label']
+    df2['New Label'] = Label
     print(df2)
 
     '''#n-gram
