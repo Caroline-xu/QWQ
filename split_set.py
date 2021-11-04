@@ -10,10 +10,7 @@ from train_linear_regression import train_linear_regression
 #from linear_regression import train_linear_regression
 #from decision_tree import train_decision_tree
 #from naive_bayes import train_naive_bayes
-
-from random_forest import train_random_forest
 #from random_forest import train_random_forest
-
 def get_data():
     # Loads the features dataset to a pandas dataframe and returns it
 # Load the Diabetes dataset
@@ -31,43 +28,50 @@ if __name__ == '__main__':
     X = df.loc[:, df.columns != 'New Label']
     #y is label column
     y = df['New Label']
-    """
-    #####train model for only once###
-    #split data into 0.8 train, 0.2 test
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42)
-    model_name = 'linear_regression'
-    res = train_linear_regression(X_train, X_test, y_train, y_test)
-    print("linear regression's accuracy:", res) """
     
-    ####train model by using 5 fold cross validation####
-    # 2- Cross-fold validation on the train data
-    k = 5
-    kf = KFold(n_splits=k, random_state=None)
-    acc_score = []
+    #split data into 0.8 train, 0.2 test
+    #X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=42)
 
-    for train_index , test_index in kf.split(X):
-        X_train , X_test = X.iloc[train_index,:],X.iloc[test_index,:]
-        y_train , y_test = y[train_index] , y[test_index]
-        
-        ### comment out the following line to train random forest classfication, and print out the accuracy 
-        # train_random_forest(X_train, X_test, y_train, y_test)
-        
-        acc = train_linear_regression(X_train, X_test, y_train, y_test)
-        acc_score.append(acc)
-    avg_acc_score = sum(acc_score)/k
-    print('accuracy of each fold - {}'.format(acc_score))
-    print('Avg accuracy : {}'.format(avg_acc_score))
+    
+    # 2- Cross-fold validation on the train data
+
+   
+    '''kf = KFold(n_splits=5) # Define the split - into 2 folds 
+    kf.get_n_splits(X) # returns the number of splitting iterations in the cross-validator
+    print(kf) 
+    KFold(n_splits=5, random_state=None, shuffle=False)
+    for train_index, test_index in kf.split(X):
+        print("TRAIN:", train_index, "TEST:", test_index)
+        X_train, X_test = X[train_index], X[test_index]
+        y_train, y_test = y[train_index], y[test_index]'''
+    '''kf = KFold(n_splits=5) # Define the split - into 5 folds 
+    kf.get_n_splits(X) # returns the number of splitting iterations in the cross-validator
+    print(kf) 
+    KFold(n_splits=5, random_state=None, shuffle=False)
+    for train_index, test_index in kf.split(X):
+        X_train, X_test = X[train_index], X[test_index]
+        y_train, y_test = y[train_index], y[test_index]
+        res = train_linear_regression(X_train, X_test, y_train, y_test) 
+        sum += res
+    average_sum = sum/5
+    print("average accuracy:", average_sum)'''
+              
     
 # 3- Train a model
    #by changing this model name to get different model
-
+    model_name = 'linear_regression'
+    res = train_linear_regression(X_train, X_test, y_train, y_test)
+    print("linear regression's accuracy:", res) 
     
-'''if model_name == 'linear_regression':
+    
+    '''if model_name == 'linear_regression':
        res = train_linear_regression(X_train, X_test, y_train, y_test)
     elif model_name == 'decision_tree':
         res = train_decision_tree()
     elif model_name == 'naive_bayes':
         res = train_naive_bayes()
     elif model_name == 'random_forest':
-        res = train_random_forest()'''
+        res = train_random_forest()
       
+    print("linear regression's result:", res)
+    # 4- print the results'''
