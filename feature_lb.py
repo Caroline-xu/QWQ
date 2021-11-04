@@ -88,8 +88,9 @@ def feature_lb():
     #add polarity to dataframe
     df2['Polarity'] = polarity_score
     #add label to data frame
-    label = df.loc[:, "Label"]
-    df2['label'] = label
+    df = pd.read_csv('500_Reddit_users_posts_labels.csv')
+    Label = df['Label']
+    df2['Label'] = Label
     print(df2)
 
     '''#n-gram
