@@ -1,7 +1,6 @@
 import pandas as pd
 import csv
 import nltk
-#nltk.download('stopwords')
 from nltk.corpus import stopwords
 stop_words = set(stopwords.words('english'))
 from nltk.util import ngrams
@@ -89,8 +88,7 @@ def feature_lb():
     #add polarity to dataframe
     df2['Polarity'] = polarity_score
     #add label to data frame
-    Label = df['New Label']
-    df2['New Label'] = Label
+    df2['New Label'] = df['Label'].replace(['Supportive','Ideation','Attempt','Behavior','Indicator'],[0, 1, 2, 3, 4])
     print(df2)
 
     '''#n-gram
