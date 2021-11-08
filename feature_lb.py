@@ -108,6 +108,5 @@ def feature_lb():
     for sent in reddit_lemm:
         all_ngrams.extend(nltk.ngrams(sent, len(sent)))'''
 
-    
         
     return df2
