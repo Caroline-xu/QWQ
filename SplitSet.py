@@ -14,6 +14,8 @@ from train_linear_regression import train_linear_regression
 from random_forest import train_random_forest
 #from random_forest import train_random_forest
 
+from decision_tree import train_decision_tree
+
 def get_data():
     # Loads the features dataset to a pandas dataframe and returns it
 # Load the Diabetes dataset
@@ -51,12 +53,12 @@ if __name__ == '__main__':
         
         ### comment out the following line to train random forest classfication, and print out the accuracy 
         # train_random_forest(X_train, X_test, y_train, y_test)
-        
-        acc = train_linear_regression(X_train, X_test, y_train, y_test)
-        acc_score.append(acc)
-    avg_acc_score = sum(acc_score)/k
-    print('accuracy of each fold - {}'.format(acc_score))
-    print('Avg accuracy : {}'.format(avg_acc_score))
+        train_decision_tree(X_train, X_test, y_train, y_test)
+        #acc = train_linear_regression(X_train, X_test, y_train, y_test)
+        #acc_score.append(acc)
+    #avg_acc_score = sum(acc_score)/k
+    #print('accuracy of each fold - {}'.format(acc_score))
+    #print('Avg accuracy : {}'.format(avg_acc_score))
     
 # 3- Train a model
    #by changing this model name to get different model
