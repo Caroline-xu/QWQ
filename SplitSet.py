@@ -4,24 +4,38 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
 from matplotlib import pyplot as plt
-
 from train_linear_regression import train_linear_regression
 # train_linear_regression() is defined in linear_regression.py
 #from linear_regression import train_linear_regression
 #from decision_tree import train_decision_tree
 #from naive_bayes import train_naive_bayes
-
-from random_forest import train_random_forest
 #from random_forest import train_random_forest
+from random_forest import train_random_forest
+# for standardize data
+from sklearn.preprocessing import StandardScaler
+# import PCA
+from sklearn.decomposition import PCA
+
+# call this function to normalize the data (scalling) and use PCA to reduce dimension(features) to 300 
+# take X as features and Y as label (unnormailzied)
+def PCA_reduce_dimension(X, Y):
+    X = StandardScaler().fit_transform(X)
+    pca = PCA(n_components=300)
+    principalComponents = pca.fit_transform(X)
+    principalDf = pd.DataFrame(data = principalComponents)
+    finalDf = pd.concat([principalDf, Y], axis = 1)
+    #print(finalDf)
+    return finalDf
 
 from decision_tree import train_decision_tree
 
 def get_data():
-    # Loads the features dataset to a pandas dataframe and returns it
-# Load the Diabetes dataset
     df = feature_lb()
+    X = df.loc[:, df.columns != 'New Label']
+    y = df['New Label']
+    final_df = PCA_reduce_dimention(X,y)
     #print(df)
-    return df
+    return final_df
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
