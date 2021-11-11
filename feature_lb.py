@@ -42,6 +42,18 @@ def feature_lb():
     df3.to_csv('countvec.zip', index=False,
             compression=compression_opts) 
 
+    ##ngram
+    vecn = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+    for n in vecn:
+        n_grams = []
+        tfidf_ngrams = TfidfVectorizer(analyzer=lambda x:[w for w in x if w not in stop_words])
+        for i in range(500):
+            n_grams.append(ngrams(reddit_lemm[i], n))
+
+        tfidf_ngrams_vectors = tfidf_ngrams.fit_transform(n_grams)
+        dfngram = pd.DataFrame(tfidf_ngrams_vectors.todense(), columns=tfidf_ngrams.vocabulary_)
+
+
 
     #Sentiment extraction
     #polarity of sentences
@@ -95,5 +107,6 @@ def feature_lb():
     all_ngrams = []
     for sent in reddit_lemm:
         all_ngrams.extend(nltk.ngrams(sent, len(sent)))'''
+
         
     return df2

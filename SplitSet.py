@@ -27,6 +27,8 @@ def PCA_reduce_dimension(X, Y):
     #print(finalDf)
     return finalDf
 
+from decision_tree import train_decision_tree
+
 def get_data():
     df = feature_lb()
     X = df.loc[:, df.columns != 'New Label']
@@ -68,8 +70,7 @@ if __name__ == '__main__':
         y_train , y_test = y[train_index] , y[test_index]
         train_random_forest(X_train, X_test, y_train, y_test)
         
-
-
+        
 ''' Linear Regression model
     for train_index , test_index in kf.split(X):
         X_train , X_test = X.iloc[train_index,:],X.iloc[test_index,:]
@@ -80,8 +81,6 @@ if __name__ == '__main__':
     print('accuracy of each fold - {}'.format(acc_score))
     print('Avg accuracy : {}'.format(avg_acc_score))
 '''
-
-
 
 # 3- Train a model
    #by changing this model name to get different model
