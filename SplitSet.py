@@ -9,6 +9,7 @@ from matplotlib import pyplot as plt
 #from linear_regression import train_linear_regression
 #from decision_tree import train_decision_tree
 #from naive_bayes import train_naive_bayes
+from Naive_Bayes import train_naive_bayes
 #from random_forest import train_random_forest
 from random_forest import train_random_forest
 # for standardize data
@@ -69,7 +70,7 @@ if __name__ == '__main__':
         X_train , X_test = X.iloc[train_index,:],X.iloc[test_index,:]
         y_train , y_test = y[train_index] , y[test_index]
         train_random_forest(X_train, X_test, y_train, y_test)
-        
+        train_naive_bayes(X_train, X_test, y_train, y_test)
         
 ''' Linear Regression model
     for train_index , test_index in kf.split(X):
