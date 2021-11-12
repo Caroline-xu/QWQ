@@ -14,6 +14,7 @@ def extract_special_feature():
     df0["count?"]= df0["Post"].str.count(search2, re.I)
     df0['Uppercase'] = df0['Post'].str.findall(r'[A-Z]').str.len()
     print(df0)
+    return df0
 
 
 
