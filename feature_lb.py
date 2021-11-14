@@ -7,6 +7,7 @@ from nltk.util import ngrams
 from nltk.tokenize import word_tokenize, RegexpTokenizer
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer 
+from punct_cap_feature import extract_special_feature
 
 def feature_lb():
     from preprocessing import reddit_lemm
@@ -101,6 +102,10 @@ def feature_lb():
     df2['Polarity'] = polarity_score
     #add label to data frame
     df2['New Label'] = df['Label'].replace(['Supportive','Ideation','Attempt','Behavior','Indicator'],[0, 1, 2, 3, 4])
+    df0 = extract_special_feature()
+    df2['count !'] = df0['count!']
+    df2['count ?'] = df0['count?']
+    df2['count capital'] = df0['Uppercase']
     print(df2)
 
     '''#n-gram
