@@ -10,34 +10,37 @@ nltk.download('wordnet')
 from nltk.stem import WordNetLemmatizer
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.stem.porter import PorterStemmer
+import os
 
 #Data Proprocessing
-df = pd.read_csv('500_Reddit_users_posts_labels.csv')
+df = pd.read_csv('/Users/wangjiale/Desktop/QWQ/Data/500_Reddit_users_posts_labels.csv')
 
-#define stop words
-stop_words = list(set(stopwords.words('english')))
+def tokenized(df):
 
-#tokenize "Post" column, can create new column called "tokenized_post"
-df['Tokenized Post'] = df.apply(lambda row: nltk.word_tokenize(row['Post']), axis=1)
-# add new column called "New Label" which convert labels to number from 0-4
-df['New Label'] = df['Label'].replace(['Supportive','Ideation','Attempt','Behavior','Indicator'],[0, 1, 2, 3, 4])
+    #define stop words
+    stop_words = list(set(stopwords.words('english')))
 
-#iterrate over "tokenized_posts" cloumn
-for index, value in df["Tokenized Post"].items():
-    #contain the clean tokens of a post, set list to empty every time finish iterating a post
-    clean_token=[]
-    #for each word in a single post
-    for token in value:
-        #remove any value that are not alphabetical
-        new_token = re.sub(r'[^a-zA-Z]+', '', token.lower()) 
-        #remove empty value and single character value, remove stop words
-        if (new_token != "") and (len(new_token) >= 2) and (new_token not in stop_words): 
-            vowels=len([v for v in new_token if v in "aeiou"])
-            if vowels != 0: #remove line that only contains consonants
-                clean_token.append(new_token)
-    #change data in "Tokenized Post" to list of tokenized words with stop words removed 
-    df["Tokenized Post"][index]=clean_token
-    
+    #tokenize "Post" column, can create new column called "tokenized_post"
+    df['Tokenized Post'] = df.apply(lambda row: nltk.word_tokenize(row['Post']), axis=1)
+    # add new column called "New Label" which convert labels to number from 0-4
+    df['New Label'] = df['Label'].replace(['Supportive','Ideation','Attempt','Behavior','Indicator'],[0, 1, 2, 3, 4])
+
+    #iterrate over "tokenized_posts" cloumn
+    for index, value in df["Tokenized Post"].items():
+        #contain the clean tokens of a post, set list to empty every time finish iterating a post
+        clean_token=[]
+        #for each word in a single post
+        for token in value:
+            #remove any value that are not alphabetical
+            new_token = re.sub(r'[^a-zA-Z]+', '', token.lower()) 
+            #remove empty value and single character value, remove stop words
+            if (new_token != "") and (len(new_token) >= 2) and (new_token not in stop_words): 
+                vowels=len([v for v in new_token if v in "aeiou"])
+                if vowels != 0: #remove line that only contains consonants
+                    clean_token.append(new_token)
+        #change data in "Tokenized Post" to list of tokenized words with stop words removed 
+        df["Tokenized Post"][index]=clean_token
+    return df
 '''  
 To check if there is stop word:
 num=0
@@ -61,6 +64,8 @@ stemmer = PorterStemmer()
 reddit_lemm = []
 #create a stemming list for reddit posts
 reddit_stem = []
+
+df = tokenized(df)
 
 ######need to change this hardcode(500) to the length of post !!!!!!
 for i in range(500):
