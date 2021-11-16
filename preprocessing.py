@@ -13,7 +13,7 @@ from nltk.stem.porter import PorterStemmer
 import os
 
 #Data Proprocessing
-df = pd.read_csv('/Users/wangjiale/Desktop/QWQ/Data/500_Reddit_users_posts_labels.csv')
+df = pd.read_csv('Data/500_Reddit_users_posts_labels.csv')
 
 def tokenized(df):
 
