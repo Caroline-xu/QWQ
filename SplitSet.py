@@ -13,6 +13,7 @@ from linear_regression import train_linear_regression
 from decision_tree import train_decision_tree
 from naive_bayes import train_naive_bayes
 from random_forest import train_random_forest
+from dummy_classifier import dummy_classifier
 # call this function to normalize the data (scalling) and use PCA to reduce dimension(features) to 300 
 # take X as features and Y as label (unnormailzied)
 
@@ -53,6 +54,8 @@ def fiveCrossValidation(model_name):
             acc,mse,mae,rmse = train_naive_bayes(X_train, X_test, y_train, y_test)
         elif model_name == 'random_forest':
             acc,mse,mae,rmse,r2Score = train_random_forest(X_train, X_test, y_train, y_test)
+
+        dummy_classifier(X_train, y_train)
             
         #acc = train_linear_regression(X_train, X_test, y_train, y_test)
         acc_total.append(acc)
