@@ -34,7 +34,10 @@ def feature_lb():
     
 def tf_idf():    
     #TF-IDF
-    tfidf = TfidfVectorizer(analyzer=lambda x:[w for w in x if w not in stop_words])
+    #tfidf = TfidfVectorizer(analyzer=lambda x:[w for w in x if w not in stop_words])
+    #tfidf = TfidfVectorizer(analyzer=lambda x:[w for w in x if w not in stop_words], max_features=20)
+    #tfidf = TfidfVectorizer(analyzer=lambda x:[w for w in x if w not in stop_words], max_features=50)
+    tfidf = TfidfVectorizer(analyzer=lambda x:[w for w in x if w not in stop_words], max_features=100)
     tfidf_vectors = tfidf.fit_transform(reddit_lemm)
 
     df2 = pd.DataFrame(tfidf_vectors.todense(), columns=tfidf.vocabulary_)
