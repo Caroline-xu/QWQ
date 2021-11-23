@@ -18,15 +18,6 @@ from dummy_classifier import dummy_classifier
 # call this function to normalize the data (scalling) and use PCA to reduce dimension(features) to 300 
 # take X as features and Y as label (unnormailzied)
 
-df = feature_lb()
-
-def max_feature(num):
-    tf = TfidfVectorizer(max_features=num).fit(df)  
-    tf.vocabulary_  
-    tf.vocabulary_.__len__()  
-    print("For " + str(num))
-    print(tf.fit_transform(df))
-
 def PCA_reduce_dimension(X, Y):
     X = StandardScaler().fit_transform(X)
     pca = PCA(n_components=300)
@@ -37,6 +28,7 @@ def PCA_reduce_dimension(X, Y):
     return finalDf
 
 def get_data():
+    df = feature_lb()
     X = df.loc[:, df.columns != 'New Label']
     y = df['New Label']
     final_df = PCA_reduce_dimension(X,y)
@@ -90,16 +82,13 @@ def fiveCrossValidation(model_name):
 if __name__ == '__main__':
     # get the features
     #df = get_data()
+    df = feature_lb()
     # 1- Split data to train and test
-    df = get_data()
+    #df = get_data()
     #X is whole dataframe except label column 
     X = df.loc[:, df.columns != 'New Label']
     #y is label column
     y = df['New Label']
-
-    """max_feature(20)
-    max_feature(50)
-    max_feature(100)"""
     
     ####train model by using 5 fold cross validation####
     # 2- Cross-fold validation on the train data   
