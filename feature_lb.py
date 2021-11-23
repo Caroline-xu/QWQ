@@ -10,7 +10,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from punct_cap_feature import extract_special_feature
 from preprocessing import reddit_lemm
 from preprocessing import reddit_stem
-from preprocessing import stop_words
+#from preprocessing import stop_words
 from preprocessing import df
 from sklearn.feature_extraction.text import TfidfVectorizer
 

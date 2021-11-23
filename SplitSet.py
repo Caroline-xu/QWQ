@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
 from matplotlib import pyplot as plt
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 # for standardize data
 from sklearn.preprocessing import StandardScaler
@@ -17,6 +18,15 @@ from dummy_classifier import dummy_classifier
 # call this function to normalize the data (scalling) and use PCA to reduce dimension(features) to 300 
 # take X as features and Y as label (unnormailzied)
 
+df = feature_lb()
+
+def max_feature(num):
+    tf = TfidfVectorizer(max_features=num).fit(df)  
+    tf.vocabulary_  
+    tf.vocabulary_.__len__()  
+    print("For " + str(num))
+    print(tf.fit_transform(df))
+
 def PCA_reduce_dimension(X, Y):
     X = StandardScaler().fit_transform(X)
     pca = PCA(n_components=300)
@@ -27,7 +37,6 @@ def PCA_reduce_dimension(X, Y):
     return finalDf
 
 def get_data():
-    df = feature_lb()
     X = df.loc[:, df.columns != 'New Label']
     y = df['New Label']
     final_df = PCA_reduce_dimension(X,y)
@@ -87,11 +96,17 @@ if __name__ == '__main__':
     X = df.loc[:, df.columns != 'New Label']
     #y is label column
     y = df['New Label']
+
+    """max_feature(20)
+    max_feature(50)
+    max_feature(100)"""
     
     ####train model by using 5 fold cross validation####
     # 2- Cross-fold validation on the train data   
     model_name = "random_forest"
-    fiveCrossValidation(model_name)    
+    fiveCrossValidation(model_name)  
+
+
     
     
     
