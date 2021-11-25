@@ -12,7 +12,6 @@ from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.stem.porter import PorterStemmer
 import os
 
-
 def tokenized(df):
 
     #define stop words
