@@ -1,18 +1,15 @@
 import pandas as pd
-
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 import statistics
 import scipy.stats as stats
 import pylab as pl
-
-
 import re
 
 def extract_special_feature():
     # read the data
-    df0 = pd.read_csv('500_Reddit_users_posts_labels.csv')
+    df0 = pd.read_csv('./Data/500_Reddit_users_posts_labels.csv')
     # delete empty lines
     df0.dropna(inplace = True)
     # declare and initialize punctuation
@@ -28,7 +25,6 @@ def extract_special_feature():
     mean = statistics.mean(h1)
     sd = statistics.stdev(h1)
     plt.plot(h1, norm.pdf(h1, mean, sd), label='for !')
-
 
     h2 = np.sort(df0["count?"])
     mean2 = statistics.mean(h2)
@@ -53,15 +49,15 @@ def extract_special_feature():
             Supportive += 1
             sumofexclamation[0] += df0["count!"][i]
             sumofques[0] += df0["count?"][i]
-        elif df0['Label'][i] == "Ideation":
+        elif df0['Label'][i] == "Indicator":
             Ideation += 1
             sumofexclamation[1] += df0["count!"][i]
             sumofques[1] += df0["count?"][i]
-        elif df0['Label'][i] == "Behavior":
+        elif df0['Label'][i] == "Ideation":
             Behavior += 1
             sumofexclamation[2] += df0["count!"][i]
             sumofques[2] += df0["count?"][i]
-        elif df0['Label'][i] == "Indicator":
+        elif df0['Label'][i] == "Behavior":
             Indicator += 1
             sumofexclamation[3] += df0["count!"][i]
             sumofques[3] += df0["count?"][i]
@@ -69,8 +65,9 @@ def extract_special_feature():
             Attempt += 1
             sumofexclamation[4] += df0["count!"][i]
             sumofques[4] += df0["count?"][i]
+        
+    Labels = ['Supportive','Indicator','Ideation','Behavior','Attempt']
     
-    Labels = ['Supportive','Ideation','Behavior','Indicator','Attempt']
     Exclamation_mark_Per_labels = [sumofexclamation[0]/Supportive,sumofexclamation[1]/Ideation,sumofexclamation[2]/Behavior,sumofexclamation[3]/Indicator,sumofexclamation[4]/Attempt]
     Question_mark_Per_labels = [sumofques[0]/Supportive,sumofques[1]/Ideation,sumofques[2]/Behavior,sumofques[3]/Indicator,sumofques[4]/Attempt]
 
@@ -78,7 +75,6 @@ def extract_special_feature():
 
     plt.bar(X_axis - 0.2, Exclamation_mark_Per_labels, 0.4, label = 'Exclamation Mark (!)')
     plt.bar(X_axis + 0.2, Question_mark_Per_labels, 0.4, label = 'Question Mark (?)')
-
     plt.xticks(X_axis, Labels)
     plt.title('Labels Vs Average Number of Marks in each Label')
     plt.xlabel('Labels')
@@ -86,10 +82,6 @@ def extract_special_feature():
     plt.legend()
     plt.show()
     
-
-
-    
     return df0
 
 extract_special_feature()
-
