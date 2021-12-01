@@ -2,10 +2,7 @@
 
 dataset： https://zenodo.org/record/2667859#.YWenu2ZKiqA
 
-presentation draft Google Docs:
-https://docs.google.com/document/d/1FjO0tdytC9ico1_VTef8aqPaxEuF5hYGruHQTFKIGSY/edit
-
-Report Google Doc:
+White paper(Long report) Google Doc:
 https://docs.google.com/document/d/1ywoo7DtWBgx5apN1SrhX92jk_QdJDh5seLADxCRGD4w/edit
 
 Short Summary Google Doc:
