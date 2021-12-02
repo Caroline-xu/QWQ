@@ -13,6 +13,6 @@ https://github.com/Caroline-xu/QWQ/blob/main/documents/Short%20Summary%20-%20For
 Presentation Slides:
 https://github.com/Caroline-xu/QWQ/blob/main/documents/Slides%20-%20Depression%20Prediction%20in%20Social%20Media.pptx
 
-how to run:
+How to run:
 download all the file, run splitSet.py to get accuracy of each model
 
